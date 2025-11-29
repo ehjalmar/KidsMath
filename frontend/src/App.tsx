@@ -28,10 +28,10 @@ export default function App() {
   }
 
   return (
-    <div className="app-root">
+    <div className="min-h-screen flex flex-col bg-slate-50">
       <Header />
-      <main className="container">
-        <section className="controls">
+      <main className="mx-auto w-full max-w-[860px] p-4 sm:p-6 bg-white rounded-xl shadow-md my-5">
+        <section className="controls flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <label>
             Difficulty:
             <select value={level} onChange={handleLevelChange}>
@@ -41,9 +41,9 @@ export default function App() {
             </select>
           </label>
 
-          <div className="operator-options" aria-hidden={false}>
-            <label style={{marginLeft:12}}>Operators:</label>
-            <label style={{marginLeft:8}}>
+          <div className="operator-options flex items-center gap-2" aria-hidden={false}>
+            <label className="text-sm text-slate-700 mr-2">Operators:</label>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('+')}
@@ -55,7 +55,7 @@ export default function App() {
               />
               +
             </label>
-            <label style={{marginLeft:8}}>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('-')}
@@ -67,7 +67,7 @@ export default function App() {
               />
               -
             </label>
-            <label style={{marginLeft:8}}>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('*')}
@@ -80,7 +80,7 @@ export default function App() {
               ×
             </label>
           </div>
-          <div className="score">Score: {score}</div>
+          <div className="score text-sm font-semibold">Score: {score}</div>
         </section>
 
         <Problem level={level} allowedOperators={operators} onCorrect={handleCorrect} onSkip={handleSkip} />
