@@ -25,11 +25,20 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies (frontend)
+        # install from the frontend folder — if package-lock.json exists we'll use `npm ci`, otherwise fall back to `npm install`
+        run: |
+          cd frontend
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
-      - name: Build
-        run: npm run build --if-present
+      - name: Build (frontend)
+        run: |
+          cd frontend
+          npm run build --if-present
 
       - name: 'Deploy to Azure Static Web Apps'
         uses: Azure/static-web-apps-deploy@v1
@@ -37,6 +46,6 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
-          app_location: '/' # App source code path
+          app_location: 'frontend' # App source code path
           api_location: '' # No Azure Functions by default
-          output_location: 'dist' # Built app location
+          output_location: 'dist' # Built app location (relative to app_location)
