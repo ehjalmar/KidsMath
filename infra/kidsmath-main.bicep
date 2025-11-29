@@ -3,7 +3,11 @@
 // Run: az deployment group create -g <rg> -f kidsmath-main.bicep -p repositoryUrl=https://github.com/<owner>/<repo>
 
 param staticSiteName string = 'kidsmath-static'
-param location string = resourceGroup().location
+// Use a region supported by Microsoft.Web/staticSites. ResourceGroups can
+// live in other regions, but Static Web Apps are only available in a subset
+// of regions. Set a safe default here (westeurope) and allow override at
+// deployment time if needed.
+param location string = 'westeurope'
 param skuName string = 'Free' // Valid values: 'Free' or 'Standard'
 param repositoryUrl string
 param branch string = 'main'
