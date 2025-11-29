@@ -1,0 +1,39 @@
+name: Deploy infrastructure (Bicep)
+
+on:
+  push:
+    paths:
+      - 'infra/**'
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    name: Deploy Bicep to rg-kidsmath
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Show current subscription
+        run: az account show --output table
+
+      - name: Deploy Bicep to resource group `rg-kidsmath`
+        env:
+          RG_NAME: rg-kidsmath
+        run: |
+          set -e
+          echo "Deploying infra/kidsmath-main.bicep to resource group: $RG_NAME"
+          az deployment group create \
+            --resource-group "$RG_NAME" \
+            --template-file infra/kidsmath-main.bicep \
+            --parameters repositoryUrl="https://github.com/${{ github.repository }}" \
+                         appArtifactLocation="dist" \
+                         branch="${{ github.ref_name || 'main' }}"
