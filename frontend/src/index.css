@@ -15,8 +15,10 @@ body{ -webkit-font-smoothing:antialiased; background-color:#f8fafc; color:#0f172
 /* Fallbacks for colors / utilities that didn't get generated during build
 	 (keeps the app looking right while we finish migrating to Tailwind) */
 header {
-	background: linear-gradient(90deg,#93c5fd,#60a5fa);
-	color: #fff;
+	/* Strong fallback so header always appears blue even if utilities are missing */
+	background: linear-gradient(90deg,#93c5fd,#60a5fa) !important;
+	background-color: #2563eb !important; /* explicit blue fallback */
+	color: #fff !important;
 	font-family: 'Fredoka', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
 .bg-accent { background-color: #2563eb; }
@@ -29,6 +31,7 @@ header {
 /* core layout / card */
 .bg-white { background-color: #ffffff; }
 .rounded-xl { border-radius: 1rem; }
+.rounded-t-xl { border-top-left-radius: 1rem; border-top-right-radius: 1rem; }
 .rounded-lg { border-radius: 0.5rem; }
 .shadow-md { box-shadow: 0 8px 24px rgba(2,6,23,0.08); }
 
@@ -36,6 +39,10 @@ header {
 .problem { background: #fff; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 6px 18px rgba(2,6,23,0.04); margin-bottom: 0.75rem; }
 .equation { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap }
 .controls { display:flex; gap:0.75rem; flex-wrap:wrap }
+
+/* App & control specific layout fallbacks */
+.app-card { padding-left: 0; padding-right: 0; overflow: hidden; }
+.overflow-hidden { overflow: hidden; }
 
 /* form control fallbacks */
 .border-slate-200 { border-color: #e6edf3; }
@@ -51,3 +58,6 @@ header {
 /* ensure buttons & inputs visually separated when utilities are absent */
 .controls button { border: 0; display: inline-block; }
 .answer { margin-left: 0.25rem; margin-right: 0.25rem; }
+
+/* footer fallback centering */
+.footer { text-align: center; padding: 1rem 0; color: #94a3b8; font-size: 0.9rem; }

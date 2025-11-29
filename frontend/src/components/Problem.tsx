@@ -77,7 +77,7 @@ export default function Problem({ level, allowedOperators, onCorrect, onSkip }: 
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             inputMode="numeric"
-            className="answer p-3 rounded-lg border border-slate-200 text-center text-lg w-full sm:w-36"
+            className="answer p-3 rounded-lg border border-slate-200 text-center text-lg w-full sm:w-36 mb-2 sm:mb-0"
           />
         </div>
 

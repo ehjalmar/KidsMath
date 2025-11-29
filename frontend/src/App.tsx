@@ -28,11 +28,13 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50">
-      <Header />
-      <main className="mx-auto w-full max-w-[860px] p-4 sm:p-6 bg-white rounded-xl shadow-md my-5 app-card">
+    <div className="min-h-screen flex flex-col bg-slate-50 px-3 sm:px-4">
+      <main className="mx-auto w-full max-w-[860px] p-0 bg-white rounded-xl shadow-md my-4 sm:my-5 app-card overflow-hidden">
+        {/* header is now part of the card so it can share rounded corners */}
+        <Header />
+        <div className="p-4 sm:p-6">
         <section className="controls flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-          <label>
+          <label className="flex items-center gap-2">
             Difficulty:
             <select value={level} onChange={handleLevelChange}>
               <option value={1}>Simple</option>
@@ -83,7 +85,8 @@ export default function App() {
           <div className="score text-sm font-semibold">Score: {score}</div>
         </section>
 
-        <Problem level={level} allowedOperators={operators} onCorrect={handleCorrect} onSkip={handleSkip} />
+          <Problem level={level} allowedOperators={operators} onCorrect={handleCorrect} onSkip={handleSkip} />
+        </div>
       </main>
 
       <footer className="footer">Built with ❤️ for curious kids</footer>
