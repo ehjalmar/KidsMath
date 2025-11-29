@@ -30,7 +30,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Header />
-      <main className="mx-auto w-full max-w-[860px] p-4 sm:p-6 bg-white rounded-xl shadow-md my-5">
+      <main className="mx-auto w-full max-w-[860px] p-4 sm:p-6 bg-white rounded-xl shadow-md my-5 app-card">
         <section className="controls flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <label>
             Difficulty:
