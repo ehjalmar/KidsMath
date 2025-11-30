@@ -67,25 +67,25 @@ export default function Problem({ level, allowedOperators, onCorrect, onSkip }: 
   return (
     <section className="problem">
       <form onSubmit={handleCheck}>
-        <div className="equation">
-          <strong>{a}</strong>
-          <span className="op">{op === '*' ? '×' : op}</span>
-          <strong>{b}</strong>
-          <span>=</span>
+        <div className="equation flex items-center gap-3 text-2xl flex-wrap">
+          <strong className="text-2xl w-8 text-center">{a}</strong>
+          <span className="op text-2xl">{op === '*' ? '×' : op}</span>
+          <strong className="text-2xl w-8 text-center">{b}</strong>
+          <span className="text-2xl">=</span>
           <input
             aria-label="answer"
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
             inputMode="numeric"
-            className="answer"
+            className="answer p-3 rounded-lg border border-slate-200 text-center text-lg w-full sm:w-36 mb-2 sm:mb-0"
           />
         </div>
 
-        <div className="controls">
-          <button type="submit" className="btn primary">
+        <div className="controls mt-4 flex flex-col sm:flex-row sm:gap-3 gap-2">
+          <button type="submit" className="px-4 py-2 rounded-lg bg-accent text-white font-semibold" >
             Check
           </button>
-          <button type="button" className="btn" onClick={handleSkipClick}>
+          <button type="button" className="px-4 py-2 rounded-lg bg-slate-100 text-accent font-semibold" onClick={handleSkipClick}>
             Skip
           </button>
         </div>

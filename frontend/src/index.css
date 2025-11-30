@@ -1,21 +1,63 @@
-:root{
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --accent: #2563eb;
-  --muted: #6b7280;
+:root{--accent:#2563eb}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* tiny global overrides to keep a consistent base look */
+body{ -webkit-font-smoothing:antialiased; background-color:#f8fafc; color:#0f172a; font-family: 'Fredoka', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial }
+.app-root{min-height:100vh}
+
+/* small component tokens reused in javascript (kept intentionally light) */
+.container { /* layout classes are applied directly on JSX to avoid @apply with responsive utilities */ }
+.score { font-weight: 600 }
+.message { margin-top: 0.75rem; font-size: 0.875rem; color: #64748b }
+
+/* Fallbacks for colors / utilities that didn't get generated during build
+	 (keeps the app looking right while we finish migrating to Tailwind) */
+header {
+	/* Strong fallback so header always appears blue even if utilities are missing */
+	background: linear-gradient(90deg,#93c5fd,#60a5fa) !important;
+	background-color: #2563eb !important; /* explicit blue fallback */
+	color: #fff !important;
+	font-family: 'Fredoka', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
 }
-*{box-sizing:border-box}
-body{font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue';background:var(--bg);color:#0f172a;margin:0}
-.app-root{display:flex;min-height:100vh;flex-direction:column}
-.header{padding:24px;text-align:center;background:linear-gradient(90deg,#93c5fd,#60a5fa);color:white}
-.brand{font-weight:800;font-size:20px}
-.tagline{margin:8px 0 0;font-size:14px;color:rgba(255,255,255,0.9)}
-.container{max-width:860px;margin:36px auto;padding:24px;background:var(--card);border-radius:10px;box-shadow:0 6px 20px rgba(16,24,40,0.08)}
-.controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.score{font-weight:700}
-.problem .equation{display:flex;align-items:center;gap:14px;font-size:28px}
-.answer{width:88px;padding:8px;border-radius:8px;border:1px solid #e6e9ee;text-align:center;font-size:20px}
-.btn{padding:8px 14px;border-radius:8px;border:none;background:#e6eefc;color:var(--accent);cursor:pointer}
-.btn.primary{background:var(--accent);color:white}
-.message{margin-top:12px;color:var(--muted)}
-.footer{text-align:center;margin-top:auto;padding:18px;color:var(--muted);font-size:14px}
+.bg-accent { background-color: #2563eb; }
+.text-white { color: #fff; }
+
+/* Fallbacks for commonly-used utilities that sometimes get purged in production builds
+	These ensure the header, main card, problem card and form controls keep a usable look
+	while we finish migrating to Tailwind or when classes are missing from generated CSS. */
+
+/* core layout / card */
+.bg-white { background-color: #ffffff; }
+.rounded-xl { border-radius: 1rem; }
+.rounded-t-xl { border-top-left-radius: 1rem; border-top-right-radius: 1rem; }
+.rounded-lg { border-radius: 0.5rem; }
+.shadow-md { box-shadow: 0 8px 24px rgba(2,6,23,0.08); }
+
+/* problem card + layout */
+.problem { background: #fff; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 6px 18px rgba(2,6,23,0.04); margin-bottom: 0.75rem; }
+.equation { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap }
+.controls { display:flex; gap:0.75rem; flex-wrap:wrap }
+
+/* App & control specific layout fallbacks */
+.app-card { padding-left: 0; padding-right: 0; overflow: hidden; }
+.overflow-hidden { overflow: hidden; }
+
+/* form control fallbacks */
+.border-slate-200 { border-color: #e6edf3; }
+.bg-slate-100 { background-color: #f1f5f9; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.p-3 { padding: 0.75rem; }
+.w-full { width: 100%; }
+.text-lg { font-size: 1.125rem; }
+.text-accent { color: var(--accent); }
+.font-semibold { font-weight: 600; }
+
+/* ensure buttons & inputs visually separated when utilities are absent */
+.controls button { border: 0; display: inline-block; }
+.answer { margin-left: 0.25rem; margin-right: 0.25rem; }
+
+/* footer fallback centering */
+.footer { text-align: center; padding: 1rem 0; color: #94a3b8; font-size: 0.9rem; }

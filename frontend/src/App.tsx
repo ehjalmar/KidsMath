@@ -28,11 +28,13 @@ export default function App() {
   }
 
   return (
-    <div className="app-root">
-      <Header />
-      <main className="container">
-        <section className="controls">
-          <label>
+    <div className="min-h-screen flex flex-col bg-slate-50 px-3 sm:px-4">
+      <main className="mx-auto w-full max-w-[860px] p-0 bg-white rounded-xl shadow-md my-4 sm:my-5 app-card overflow-hidden">
+        {/* header is now part of the card so it can share rounded corners */}
+        <Header />
+        <div className="p-4 sm:p-6">
+        <section className="controls flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+          <label className="flex items-center gap-2">
             Difficulty:
             <select value={level} onChange={handleLevelChange}>
               <option value={1}>Simple</option>
@@ -41,9 +43,9 @@ export default function App() {
             </select>
           </label>
 
-          <div className="operator-options" aria-hidden={false}>
-            <label style={{marginLeft:12}}>Operators:</label>
-            <label style={{marginLeft:8}}>
+          <div className="operator-options flex items-center gap-2" aria-hidden={false}>
+            <label className="text-sm text-slate-700 mr-2">Operators:</label>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('+')}
@@ -55,7 +57,7 @@ export default function App() {
               />
               +
             </label>
-            <label style={{marginLeft:8}}>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('-')}
@@ -67,7 +69,7 @@ export default function App() {
               />
               -
             </label>
-            <label style={{marginLeft:8}}>
+            <label className="flex items-center gap-2">
               <input
                 type="checkbox"
                 checked={operators.includes('*')}
@@ -80,10 +82,11 @@ export default function App() {
               ×
             </label>
           </div>
-          <div className="score">Score: {score}</div>
+          <div className="score text-sm font-semibold">Score: {score}</div>
         </section>
 
-        <Problem level={level} allowedOperators={operators} onCorrect={handleCorrect} onSkip={handleSkip} />
+          <Problem level={level} allowedOperators={operators} onCorrect={handleCorrect} onSkip={handleSkip} />
+        </div>
       </main>
 
       <footer className="footer">Built with ❤️ for curious kids</footer>
