@@ -110,7 +110,7 @@ export default function App() {
 
               <button
                 onClick={handleStart}
-                className="w-full mt-8 px-6 py-4 rounded-lg bg-accent text-white font-bold text-xl"
+                className="w-full mt-12 px-4 py-2 rounded-lg bg-accent text-white font-semibold"
                 disabled={operators.length === 0}
               >
                 Start Practice! 🚀
